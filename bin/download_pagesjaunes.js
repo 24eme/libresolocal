@@ -1,11 +1,12 @@
 const Nightmare = require('nightmare')
 var url = process.argv[2];
+var imagepath = process.argv[3];
 const nightmare = Nightmare({ show: true })
 
 nightmare
   .goto(url)
   .click("#didomi-notice-agree-button")
-  .screenshot("data/pagesjaunes.jpg")
+  .screenshot(imagepath)
   .evaluate(() => (document.documentElement.innerHTML))
   .end()
   .then(console.log)
