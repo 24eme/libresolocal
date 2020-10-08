@@ -5,6 +5,7 @@ const nightmare = Nightmare({ show: true })
 
 nightmare
   .goto(url)
+  .click('#didomi-notice-agree-button')
   .screenshot(imagepath)
   .evaluate(() => (document.documentElement.innerHTML))
   .end()
