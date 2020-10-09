@@ -20,8 +20,18 @@
                 </div>
             </form>
         </div>
-        <div id="main">
-
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="vue_ensemble_nav" data-toggle="tab" href="#vue_ensemble_tab" role="tab" aria-controls="vue_ensemble_tab" aria-selected="true">Vue d'ensemble <span class="badge badge-dark"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="avis_nav" data-toggle="tab" href="#avis_tab" role="tab" aria-controls="avis_tab" aria-selected="false">Avis <span class="badge badge-dark"></span></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="vue_ensemble_tab" role="tabpanel" aria-labelledby="vue_ensemble_nav"></div>
+            <div class="tab-pane fade show pt-3" id="avis_tab" role="tabpanel" aria-labelledby="avis_nav">
+            </div>
         </div>
         <div id="loader" class="card mt-2">
           <div class="row no-gutters">
@@ -51,11 +61,18 @@
                 for(k in data) {
                     nb2load = data.length;
                     jQuery.get("/page.php", data[k], function(html) {
-                        $("#main").append(html);
+                        $("#vue_ensemble_tab").append(html);
                         nb2load = nb2load - 1;
                         if(!nb2load) {
                             $('#loader').hide();
                         }
+                        $('#vue_ensemble_nav .badge').text($('#vue_ensemble_tab .card').length);
+                    });
+                }
+                for(k in data) {
+                    jQuery.get("/avis.php", data[k], function(html) {
+                        $("#avis_tab").append(html);
+                        $('#avis_nav .badge').text($('#avis_tab p').length);
                     });
                 }
             });

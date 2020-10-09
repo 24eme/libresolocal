@@ -9,20 +9,13 @@ Nightmare.action('removePopup', function(done) {
   }, done)
 });
 
-Nightmare.action('infiniteScoll', function(done) {
-  this.evaluate_now(function() {
-      document.querySelector('.section-layout.section-scrollbox.scrollable-y.scrollable-show').scrollTop = 10000;
-  }, done)
-});
-
 nightmare
   .goto(url)
   .wait('iframe')
   .removePopup()
   .click('.allxGeDnJMl__button.allxGeDnJMl__button-text')
   .wait('.ozj7Vb3wnYq__title.gm2-headline-6')
-  .infiniteScoll()
-  .wait(function() { return !document.querySelector('.section-loading'); })
+  .wait(function() { document.querySelector('.section-layout.section-scrollbox.scrollable-y.scrollable-show').scrollTop = 100000; return !document.querySelector('.section-loading'); })
   .evaluate(() => (
       document.documentElement.innerHTML))
   .end()
