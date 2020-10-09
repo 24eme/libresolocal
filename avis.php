@@ -28,12 +28,12 @@ foreach(explode("\n", $csv) as $line) {
         continue;
     }
     $data = str_getcsv($line, ";");
-    $avis[] = array("content" => $data[6], "date" => $data[3], "note" => $data[4], "author" => $data[5]);
+    $avis[] = array("plateforme" => $data[0], "content" => $data[6], "date" => $data[3], "note" => $data[4], "author" => $data[5]);
 }
 ?>
 
 <?php foreach($avis as $a): ?>
-    <span class="text-muted"><?php echo $a['date']; ?></span>&nbsp;<span class="text-warning"><?php echo $a['note']; ?>/5</span><br />
+    <?php echo $a['plateforme']; ?>&nbsp;<span class="text-muted"><?php echo $a['date']; ?></span>&nbsp;<span class="text-warning"><?php echo $a['note']; ?>/5</span><br />
     <p><?php echo $a['content']; ?><br /><small><em><?php echo $a['author']; ?></em></small></p>
 
     <hr />

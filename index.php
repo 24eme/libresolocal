@@ -10,8 +10,7 @@
   </head>
   <body>
     <div class="container mb-3">
-        <div class="mt-4">
-            <form id="form-search">
+            <form id="form-search" class="mt-4">
                 <div class="input-group mb-3">
                     <input autofocus="autofocus" class="form-control form-control-lg" type="text" placeholder="Rechercher un commercant, par exemple : Boulangerie Au Bon Pain Marseille" name="q" id="input-search" value="<?php echo isset($_GET['q']) ? $_GET['q'] : null ?>">
                     <div class="input-group-append">
@@ -19,30 +18,30 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="vue_ensemble_nav" data-toggle="tab" href="#vue_ensemble_tab" role="tab" aria-controls="vue_ensemble_tab" aria-selected="true">Vue d'ensemble <span class="badge badge-dark"></span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="avis_nav" data-toggle="tab" href="#avis_tab" role="tab" aria-controls="avis_tab" aria-selected="false">Avis <span class="badge badge-dark"></span></a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane fade show active" id="vue_ensemble_tab" role="tabpanel" aria-labelledby="vue_ensemble_nav"></div>
-            <div class="tab-pane fade show pt-3" id="avis_tab" role="tabpanel" aria-labelledby="avis_nav">
+        <div id="resultat_container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="vue_ensemble_nav" data-toggle="tab" href="#vue_ensemble_tab" role="tab" aria-controls="vue_ensemble_tab" aria-selected="true">Sites <span class="badge badge-dark"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="avis_nav" data-toggle="tab" href="#avis_tab" role="tab" aria-controls="avis_tab" aria-selected="false">Avis <span class="badge badge-dark"></span></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="vue_ensemble_tab" role="tabpanel" aria-labelledby="vue_ensemble_nav"></div>
+                <div class="tab-pane fade show pt-3" id="avis_tab" role="tabpanel" aria-labelledby="avis_nav">
+                </div>
             </div>
-        </div>
-        <div id="loader" class="card mt-2">
-          <div class="row no-gutters">
-              <div class="card-body text-center">
-                  <div class="spinner-border text-secondary" role="status">
-                      <span class="sr-only">Loading...</span>
+            <div id="loader" class="card mt-2">
+              <div class="row no-gutters">
+                  <div class="card-body text-center">
+                      <div class="spinner-border text-secondary" role="status">
+                          <span class="sr-only">Loading...</span>
+                      </div>
                   </div>
               </div>
-          </div>
+            </div>
         </div>
-
         </div>
     </div>
     <!-- Optional JavaScript -->
@@ -58,8 +57,12 @@
             $('#loader').show();
             var nb2load = 0;
             jQuery.getJSON("/search.php", $('#form-search').serialize(), function(data) {
+                nb2load = data.length;
+                if(!nb2load) {
+                    $('#loader').hide();
+                    $('#loader')
+                }
                 for(k in data) {
-                    nb2load = data.length;
                     jQuery.get("/page.php", data[k], function(html) {
                         $("#vue_ensemble_tab").append(html);
                         nb2load = nb2load - 1;
