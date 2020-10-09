@@ -5,6 +5,10 @@ var imagepath = process.argv[3];
 var nightmare = Nightmare({ show: true })
 nightmare
     .goto(url)
+    .wait('button[data-cookiebanner="accept_button"]')
+    .click('button[data-cookiebanner="accept_button"]')
+    .wait(function() { return !document.querySelector('button[data-cookiebanner="accept_button"]'); })
+    .wait(function() { document.querySelector('#pagelet_growth_expanding_cta').remove(); return !document.querySelector('#pagelet_growth_expanding_cta'); })
     .screenshot(imagepath)
     .evaluate(() => (document.documentElement.innerHTML))
     .end()
