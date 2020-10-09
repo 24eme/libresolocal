@@ -3,7 +3,9 @@ var fileHTML = process.argv[2];
 const cheerio = require('cheerio');
 const $ = cheerio.load(fs.readFileSync(fileHTML));
 
-console.log("google;Google Maps;https://www.google.com" + $('#media_result_group a').eq(1).attr('data-url'));
+if($('#media_result_group a').length) {
+    console.log("google;Google Maps;https://www.google.com" + $('#media_result_group a').eq(1).attr('data-url'));
+}
 
 $('.rc a').each(function() {
     var url = $(this).attr('href');
