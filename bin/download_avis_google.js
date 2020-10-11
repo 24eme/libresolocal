@@ -15,7 +15,7 @@ nightmare
   .removePopup()
   .click('.allxGeDnJMl__button.allxGeDnJMl__button-text')
   .wait('.ozj7Vb3wnYq__title.gm2-headline-6')
-  .wait(function() { document.querySelector('.section-layout.section-scrollbox.scrollable-y.scrollable-show').scrollTop = 100000; return !document.querySelector('.section-loading'); })
+  .wait(function() { document.querySelector('.section-layout.section-scrollbox.scrollable-y.scrollable-show').scrollTop = 100000000; return !document.querySelector('.section-loading'); })
   .evaluate(() => (
       document.documentElement.innerHTML))
   .end()
