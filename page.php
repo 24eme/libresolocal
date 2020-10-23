@@ -12,7 +12,7 @@ $htmlFile = $config["cache_dir"]."/".$id."_".$name.".html";
 $imageFile = $config["cache_dir"]."/".$id."_".$name.".jpg";
 
 if(!file_exists($htmlFile) || $clearcache) {
-    shell_exec("nodejs bin/download_".$name.".js \"".$url."\" $imageFile > ".$htmlFile);
+    shell_exec("nodejs bin/download_".$name.".js \"".$url."\" $imageFile true > ".$htmlFile);
 }
 $csv = shell_exec("nodejs bin/parse_".$name.".js $htmlFile");
 

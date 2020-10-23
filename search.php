@@ -9,7 +9,7 @@ $queryId = md5($query);
 $htmlFile = $config["cache_dir"]."/".$queryId.".html";
 
 if(!file_exists($htmlFile) || $clearcache) {
-    shell_exec("nodejs bin/download_search.js \"".$query."\" > ".$htmlFile);
+    shell_exec("nodejs bin/download_search.js \"".$query."\" true > ".$htmlFile);
 }
 
 $csv = shell_exec("nodejs bin/parse_search.js ".$htmlFile);

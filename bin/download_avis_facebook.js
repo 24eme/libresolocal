@@ -1,8 +1,9 @@
 const Nightmare = require('nightmare')
 var url = process.argv[2];
-var imagepath = process.argv[3];
+var verbose = process.argv[3];
 
-var nightmare = Nightmare({ show: true })
+var nightmare = Nightmare({ show: verbose })
+
 nightmare
     .goto(url+"reviews/")
     .wait('button[data-cookiebanner="accept_button"]')

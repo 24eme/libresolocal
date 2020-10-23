@@ -1,6 +1,8 @@
 const Nightmare = require('nightmare')
 var search = process.argv[2];
-const nightmare = Nightmare({ show: true })
+var verbose = process.argv[3];
+
+var nightmare = Nightmare({ show: verbose })
 
 nightmare
   .goto("https://www.google.com/")

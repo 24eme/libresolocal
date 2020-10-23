@@ -1,6 +1,8 @@
 const Nightmare = require('nightmare')
 var url = process.argv[2];
-const nightmare = Nightmare({ show: true, waitTimeout: 300000 })
+var verbose = process.argv[3];
+
+var nightmare = Nightmare({ show: verbose, waitTimeout: 300000 })
 
 Nightmare.action('removePopup', function(done) {
   this.evaluate_now(function() {
