@@ -1,4 +1,5 @@
 var fs = require('fs');
+var main = require('./main.js');
 var fileHTML = process.argv[2];
 const cheerio = require('cheerio');
 const $ = cheerio.load(fs.readFileSync(fileHTML));
@@ -14,7 +15,10 @@ $('.section-review-content').each(function() {
     }
     note = note.replace(/.*([0-9]+).*/, '$1');
     var content = $(this).find('.section-review-text').text().replace(/\n/g, "").replace(";", "");
-    var date = $(this).find('.section-review-publish-date').text();
+    var dateText = $(this).find('.section-review-publish-date').text();
     var author = $(this).find('.section-review-title').text().replace(/^[ ]+/, "").replace(/[ ]+$/, "");
-    console.log(baseLigne + ";avis;" + date + ";" + note + ";" + author + ";" + content);
+
+    dateText = main.parseRelativeDate(dateText);
+
+    console.log(baseLigne + ";avis;" + dateText + ";" + note + ";" + author + ";" + content);
 });

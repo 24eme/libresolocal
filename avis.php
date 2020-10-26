@@ -23,18 +23,21 @@ if($format == "csv") {
 }
 
 $avis = array();
+
+$plateformes = array();
 foreach(explode("\n", $csv) as $line) {
     if(!$line) {
         continue;
     }
     $data = str_getcsv($line, ";");
-    $avis[] = array("plateforme" => $data[0], "content" => $data[6], "date" => $data[3], "note" => $data[4], "author" => $data[5]);
+    $avis[] = array("plateforme" => $data[0], "content" => $data[6], "date" => new DateTime($data[3]), "note" => $data[4], "author" => $data[5]);
+    $plateformes[$data[0]]++;
 }
 ?>
 
 <?php foreach($avis as $a): ?>
-    <?php echo $a['plateforme']; ?>&nbsp;<span class="text-muted"><?php echo $a['date']; ?></span>&nbsp;<span class="text-warning"><?php echo $a['note']; ?>/5</span><br />
-    <p><?php echo $a['content']; ?><br /><small><em><?php echo $a['author']; ?></em></small></p>
+    <span class="text-secondary"><?php echo $a['date']->format("F Y"); ?></span>&nbsp;<span class="badge badge-info"><?php echo $a['plateforme']; ?></span><span class="badge badge-warning float-right"><?php echo $a['note']; ?></span>
+    <p class="mt-2"><?php echo $a['content']; ?><br /><small><em><?php echo $a['author']; ?></em></small></p>
 
     <hr />
 <?php endforeach; ?>
