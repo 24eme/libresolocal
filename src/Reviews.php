@@ -67,10 +67,6 @@ class Reviews
 
         $csv = shell_exec("nodejs $scriptPath $htmlFile");
 
-        if(!$csv) {
-            throw new Exception("parse failed");
-        }
-
         return $csv;
     }
 }

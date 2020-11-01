@@ -5,7 +5,7 @@ const $ = cheerio.load(fs.readFileSync(fileHTML));
 
 var plateforme = "pagesjaunes"
 var nom = $('#teaser-header .denom h1').text();
-var adresse = $('#teaser-footer .zone-coordonnees .address span.noTrad').text();
+var adresse = $('#teaser-footer .zone-coordonnees .address.streetAddress > span.noTrad').text();
 var phone = $('#teaser-footer .zone-coordonnees .coord-numero').text();
 var site = $('#teaser-footer .zone-coordonnees .lvs-container .pj-link.pj-lb .value').text();
 var note = $('#teaser-header .fd-note strong').text();

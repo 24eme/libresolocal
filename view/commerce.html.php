@@ -30,9 +30,9 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-md-4">
-                                  <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents($page->getImageFile())); ?>" class="card-img" alt="">
+                                  <a target="_blank" href="<?php echo $page->getUrl() ?>"><img src="data:image/png;base64,<?php echo base64_encode(file_get_contents($page->getImageFile())); ?>" class="card-img" alt="" /></a>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-5">
 
                                     <h6 style="opacity: 0.6;" class="pb-1 text-uppercase border-bottom"><?php echo $page->getPlateform() ?>
                                         <ul class="list-inline float-right small">
@@ -45,38 +45,38 @@
                                     <p class="mb-2"><?php echo $page->getPhone() ?><br />
                                     <a href=""><?php echo $page->getWebsite() ?></a></p>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <table class="table table-bordered table-striped table-sm small mb-0">
                                         <tr>
                                             <th class="text-center" colspan="2">Ouvertures</th>
                                         </tr>
                                         <tr>
-                                            <th>Lundi</th>
-                                            <td><?php echo $page->getHour('lundi') ?></td>
+                                            <th class="col-3">Lundi</th>
+                                            <td><?php echo ($page->getHour('lundi')) ? $page->getHour('lundi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Mardi</th>
-                                            <td><?php echo $page->getHour('mardi') ?></td>
+                                            <td><?php echo ($page->getHour('mardi')) ? $page->getHour('mardi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Mercredi</th>
-                                            <td><?php echo $page->getHour('mercredi') ?></td>
+                                            <td><?php echo ($page->getHour('mercredi')) ? $page->getHour('mercredi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Jeudi</th>
-                                            <td><?php echo $page->getHour('jeudi') ?></td>
+                                            <td><?php echo ($page->getHour('jeudi')) ? $page->getHour('jeudi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Vendredi</th>
-                                            <td><?php echo $page->getHour('vendredi') ?></td>
+                                            <td><?php echo ($page->getHour('vendredi')) ? $page->getHour('vendredi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Samedi</th>
-                                            <td><?php echo $page->getHour('samedi') ?></td>
+                                            <td><?php echo ($page->getHour('samedi')) ? $page->getHour('samedi') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                         <tr>
                                             <th>Dimanche</th>
-                                            <td><?php echo $page->getHour('dimanche') ?></td>
+                                            <td><?php echo ($page->getHour('dimanche')) ? $page->getHour('dimanche') : "<span class='text-muted'>Aucune information</span>" ?></td>
                                         </tr>
                                     </table>
                                 </div>

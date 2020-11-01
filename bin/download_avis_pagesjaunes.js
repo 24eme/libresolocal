@@ -15,8 +15,10 @@ nightmare
           document.querySelector('#ScrollAvis').click();
       }
 
-      var nb_avis = parseInt(document.querySelector('#teaser-header .teaser-nombre-avis').innerText);
-
+      var nb_avis = 0;
+      if(document.querySelector('#teaser-header .teaser-nombre-avis')) {
+          var nb_avis = parseInt(document.querySelector('#teaser-header .teaser-nombre-avis').innerText);
+      }
       return document.querySelectorAll('#liste-contributions li.avis').length >= nb_avis;
     })
   .evaluate(() => (document.documentElement.innerHTML))
