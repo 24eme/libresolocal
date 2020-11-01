@@ -45,8 +45,8 @@ file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test
 file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test;horaire_samedi;09:30–19:00\n", FILE_APPEND);
 file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test;horaire_dimanche;Fermé\n", FILE_APPEND);
 
-file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;il y a un mois;5;un passant;une boutique trop bien\n");
-file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;il y a un ans;5;un autre passant;Au top\n", FILE_APPEND);
+file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;".date('c').";5;un passant;une boutique trop bien\n");
+file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;".date('c').";5;un autre passant;Au top\n", FILE_APPEND);
 
 $page = new Page($urlTest);
 
