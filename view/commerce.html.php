@@ -64,12 +64,26 @@
                 <?php endforeach; ?>
             </div>
             <div class="tab-pane fade show pt-3" id="reviews_tab" role="tabpanel" aria-labelledby="reviews_nav">
-                <?php foreach($commerce->getReviews() as $review): ?>
-                    <span class="text-secondary"><?php echo $review->getDate()->format("F Y"); ?></span>&nbsp;<span class="badge badge-info"><?php echo $review->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review->getScore() ?></span>
-                    <p class="mt-2"><?php echo $review->getContent(); ?><br /><small><em><?php echo $review->getAuthor(); ?></em></small></p>
+                <div class="row">
+                    <div class="col">
+                        <?php foreach($commerce->getReviews() as $review): ?>
+                            <span class="text-secondary"><?php echo $review->getDate()->format("F Y"); ?></span>&nbsp;<span class="badge badge-info"><?php echo $review->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review->getScore() ?></span>
+                            <p class="mt-2"><?php echo $review->getContent(); ?><br /><small><em><?php echo $review->getAuthor(); ?></em></small></p>
 
-                    <hr />
-                <?php endforeach; ?>
+                            <hr />
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="col-3">
+                        <?php foreach($commerce->getReviewsFacets() as $facetName => $facets): ?>
+                        <h5><?php echo $facetName ?></h5>
+                        <div class="list-group mb-3">
+                            <?php foreach($facets as $name => $value): ?>
+                                <a href="" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"><?php echo $name ?> <span class="badge badge-primary badge-pill"><?php echo $value ?></span></a>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade show" id="images_tab" role="tabpanel" aria-labelledby="images_nav">
             </div>

@@ -13,7 +13,7 @@ $htmlFile = $config["cache_dir"]."/".$id."_avis_".$name.".html";
 if(!file_exists($htmlFile) || $clearcache) {
     shell_exec("nodejs bin/download_avis_".$name.".js \"".$url."\" true > ".$htmlFile);
 }
-$csv = shell_exec("nodejs bin/parse_avis_".$name.".js $htmlFile");
+$csv = shell_exec("nodejs bin/parse_avis_".$name.".js $htmlFile | sort -t ';' -k 4,4 -n");
 
 if($format == "csv") {
 

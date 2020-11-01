@@ -67,6 +67,21 @@ class Commerce {
         return $reviews;
     }
 
+    public function getReviewsFacets() {
+        $facets = array("Par page" => array(), "Par année" => array(), "Par note" => array());
+
+        foreach($this->getReviews() as $review) {
+            $facets['Par page'][$review->getPlateform()] += 1;
+            $facets['Par année'][$review->getDate()->format('Y')] += 1;
+            $facets['Par note'][($review->getScore()) ? $review->getScore() : "Aucune"] += 1;
+        }
+
+        krsort($facets['Par note']);
+        arsort($facets['Par page']);
+
+        return $facets;
+    }
+
     public function save() {
         $this->generateKey();
         $urls = array();
