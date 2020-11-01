@@ -10,8 +10,9 @@
   </head>
   <body class="bg-light">
     <div class="container mb-3">
-        <h2 class="mt-4 mb-3"><?php echo $commerce->getName(); ?> <small class="text-secondary"><?php echo $commerce->getAddress(); ?></small></h2>
-        <ul class="nav nav-tabs" role="tablist">
+        <a href="/" class="small float-right">Retour à l'accueil</a>
+        <h2 class="mt-3 mb-0"><?php echo $commerce->getName(); ?> <small class="text-secondary" style="font-size: 60%;"><?php echo $commerce->getAddress(); ?></small></h2>
+        <ul class="nav nav-tabs mt-3" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="informations_nav" data-toggle="tab" href="#informations_tab" role="tab" aria-controls="informations_tab" aria-selected="true">Informations <span class="badge badge-primary badge-pill"><?php echo count($commerce->getPages()) ?></span></a>
             </li>
@@ -22,7 +23,7 @@
                 <a class="nav-link" id="images_nav" data-toggle="tab" href="#images_tab" role="tab" aria-controls="images_tab" aria-selected="false">Images <span class="badge badge-primary badge-pill"></span></a>
             </li>
         </ul>
-        <div class="tab-content bg-white border-left border-right border-bottom p-3">
+        <div class="tab-content bg-white border-left border-right border-bottom rounded p-3">
             <div class="tab-pane show active" id="informations_tab" role="tabpanel" aria-labelledby="informations_nav">
                 <ul class="list-group list-group-flush">
                 <?php foreach($commerce->getPages() as $page): ?>
