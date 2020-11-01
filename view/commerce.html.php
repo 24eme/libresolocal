@@ -32,10 +32,16 @@
                                   <img src="data:image/png;base64,<?php echo base64_encode(file_get_contents($page->getImageFile())); ?>" class="card-img" alt="">
                                 </div>
                                 <div class="col-md-4">
-                                    <h5 class="mb-3 text-secondary"><?php echo $page->getPlateform() ?></h5>
-                                    <h5><?php echo $page->getName() ?></h5>
+
+                                    <h6 style="opacity: 0.6;" class="pb-1 text-uppercase border-bottom"><?php echo $page->getPlateform() ?>
+                                        <ul class="list-inline float-right small">
+                                            <li class="list-inline-item"><a href="">Modifier</a></li>
+                                            <li class="list-inline-item"><a target="_blank" href="<?php echo $page->getUrl() ?>">Voir</a></li>
+                                        </ul>
+                                    </h6>
+                                    <h6 class="pt-2 mb-3"><strong><?php echo $page->getName() ?></strong></h6>
                                     <p><?php echo str_replace(",", "<br />", $page->getAddress()); ?></p>
-                                    <p><?php echo $page->getPhone() ?><br />
+                                    <p class="mb-2"><?php echo $page->getPhone() ?><br />
                                     <a href=""><?php echo $page->getWebsite() ?></a></p>
                                 </div>
                                 <div class="col-md-4">
