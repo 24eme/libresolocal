@@ -13,20 +13,20 @@
         <h2 class="mt-4 mb-3"><?php echo $commerce->getName(); ?> <small class="text-secondary"><?php echo $commerce->getAddress(); ?></small></h2>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" id="avis_nav" data-toggle="tab" href="#avis_tab" role="tab" aria-controls="avis_tab" aria-selected="false">Informations</a>
+                <a class="nav-link" id="informations_nav" data-toggle="tab" href="#informations_tab" role="tab" aria-controls="informations_tab" aria-selected="false">Informations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" id="vue_ensemble_nav" data-toggle="tab" href="#vue_ensemble_tab" role="tab" aria-controls="vue_ensemble_tab" aria-selected="true">Pages <span class="badge badge-dark"><?php echo count($commerce->getPages()) ?></span></a>
+                <a class="nav-link active" id="pages_nav" data-toggle="tab" href="#pages_tab" role="tab" aria-controls="pages_tab" aria-selected="true">Pages <span class="badge badge-dark"><?php echo count($commerce->getPages()) ?></span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="avis_nav" data-toggle="tab" href="#avis_tab" role="tab" aria-controls="avis_tab" aria-selected="false">Avis <span class="badge badge-dark"></span></a>
+                <a class="nav-link" id="reviews_nav" data-toggle="tab" href="#reviews_tab" role="tab" aria-controls="reviews_tab" aria-selected="false">Avis <span class="badge badge-dark"><?php echo count($commerce->getReviews()) ?></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="images_nav" data-toggle="tab" href="#images_tab" role="tab" aria-controls="images_tab" aria-selected="false">Images <span class="badge badge-dark"></span></a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="vue_ensemble_tab" role="tabpanel" aria-labelledby="vue_ensemble_nav">
+            <div class="tab-pane fade show active" id="pages_tab" role="tabpanel" aria-labelledby="pages_nav">
                 <?php foreach($commerce->getPages() as $page): ?>
                     <div class="card mt-2">
                       <div class="row no-gutters">
@@ -61,7 +61,13 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-            <div class="tab-pane fade show pt-3" id="avis_tab" role="tabpanel" aria-labelledby="avis_nav">
+            <div class="tab-pane fade show pt-3" id="reviews_tab" role="tabpanel" aria-labelledby="reviews_nav">
+                <?php foreach($commerce->getReviews() as $review): ?>
+                    <span class="text-secondary"><?php echo $review[3]; ?></span>&nbsp;<span class="badge badge-info"><?php //echo $page->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review[4]; ?></span>
+                    <p class="mt-2"><?php echo $review[6]; ?><br /><small><em><?php echo $review[5]; ?></em></small></p>
+
+                    <hr />
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

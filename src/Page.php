@@ -94,6 +94,14 @@ class Page {
         return $this->hours;
     }
 
+    public function getReviews() {
+        if(!$this->hydrate) {
+            $this->hydrate();
+        }
+
+        return $this->reviews;
+    }
+
     public function hydrate() {
         foreach(explode("\n", $this->getCSV()) as $line) {
             if(!$line) {
@@ -109,6 +117,7 @@ class Page {
         $this->website = isset($infos['site']) ? $infos['site'] : null;
         $this->score = isset($infos['note']) ? $infos['note'] : null;
         $this->reviews_count = isset($infos['nombre_avis']) ? $infos['nombre_avis'] : null;
+        $this->hours = array();
         $this->hours['lundi'] = isset($infos['horaire_lundi']) ? $infos['horaire_lundi'] : null;
         $this->hours['mardi'] = isset($infos['horaire_mardi']) ? $infos['horaire_mardi'] : null;
         $this->hours['mercredi'] = isset($infos['horaire_mercredi']) ? $infos['horaire_mercredi'] : null;
@@ -116,6 +125,7 @@ class Page {
         $this->hours['vendredi'] = isset($infos['horaire_vendredi']) ? $infos['horaire_vendredi'] : null;
         $this->hours['samedi'] = isset($infos['horaire_samedi']) ? $infos['horaire_samedi'] : null;
         $this->hours['dimanche'] = isset($infos['horaire_dimanche']) ? $infos['horaire_dimanche'] : null;
+        $this->reviews = Reviews::getReviews($this->url);
 
         $this->hydrate = true;
     }
@@ -144,7 +154,7 @@ class Page {
         $html = shell_exec("nodejs ../bin/download_".self::resolvePlateform($url).".js '".$url."' $imagePath true");
 
         if(!$html) {
-            throw new Exeption("download failed");
+            throw new Exception("download failed");
         }
 
         return $html;
@@ -154,7 +164,7 @@ class Page {
         $csv = shell_exec("nodejs ../bin/parse_".self::resolvePlateform($url).".js $htmlFile");
 
         if(!$csv) {
-            throw new Exeption("parse failed");
+            throw new Exception("parse failed");
         }
 
         return $csv;

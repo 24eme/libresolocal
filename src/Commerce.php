@@ -54,6 +54,19 @@ class Commerce {
         }
     }
 
+    public function getReviews() {
+        $reviews = array();
+        foreach($this->getPages() as $page) {
+            foreach($page->getReviews() as $review) {
+                $reviews[$review[3].uniqid()] = $review;
+            }
+        }
+
+        krsort($reviews);
+
+        return $reviews;
+    }
+
     public function save() {
         $this->generateKey();
         $urls = array();

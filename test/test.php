@@ -45,6 +45,9 @@ file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test
 file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test;horaire_samedi;09:30–19:00\n", FILE_APPEND);
 file_put_contents(__DIR__."/../cache/".md5($urlTest).".csv", "test;Boutique test;horaire_dimanche;Fermé\n", FILE_APPEND);
 
+file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;il y a un mois;5;un passant;une boutique trop bien\n");
+file_put_contents(__DIR__."/../cache/".md5($urlTest)."_avis.csv", "test;Boutique test;avis;il y a un ans;5;un autre passant;Au top\n", FILE_APPEND);
+
 $page = new Page($urlTest);
 
 $test->expect($page->getName() == "Boutique test", "Nom du commerce de la page");
@@ -55,6 +58,7 @@ $test->expect($page->getScore() == 4, "Note de la page");
 $test->expect($page->getReviewsCount() == 10, "Nombre d'avis de la page");
 $test->expect(count($page->getHours()) == 7, "Tableau des horeaires de la page");
 $test->expect($page->getHour('dimanche') == "Fermé", "Horaire d'un jour de la page");
+$test->expect(count($page->getReviews()) == 2, "2 avis récupéré");
 
 $commerce = new Commerce();
 $commerce->addPage($urlTest);
