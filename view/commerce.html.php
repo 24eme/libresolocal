@@ -8,15 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   </head>
-  <body>
+  <body class="bg-light">
     <div class="container mb-3">
         <h2 class="mt-4 mb-3"><?php echo $commerce->getName(); ?> <small class="text-secondary"><?php echo $commerce->getAddress(); ?></small></h2>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link" id="informations_nav" data-toggle="tab" href="#informations_tab" role="tab" aria-controls="informations_tab" aria-selected="false">Informations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" id="pages_nav" data-toggle="tab" href="#pages_tab" role="tab" aria-controls="pages_tab" aria-selected="true">Pages <span class="badge badge-dark"><?php echo count($commerce->getPages()) ?></span></a>
+                <a class="nav-link active" id="informations_nav" data-toggle="tab" href="#informations_tab" role="tab" aria-controls="informations_tab" aria-selected="true">Informations <span class="badge badge-dark"><?php echo count($commerce->getPages()) ?></span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="reviews_nav" data-toggle="tab" href="#reviews_tab" role="tab" aria-controls="reviews_tab" aria-selected="false">Avis <span class="badge badge-dark"><?php echo count($commerce->getReviews()) ?></span></a>
@@ -26,9 +23,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade show" id="informations_tab" role="tabpanel" aria-labelledby="informations_nav">
-            </div>
-            <div class="tab-pane fade show active" id="pages_tab" role="tabpanel" aria-labelledby="pages_nav">
+            <div class="tab-pane show active" id="informations_tab" role="tabpanel" aria-labelledby="informations_nav">
                 <?php foreach($commerce->getPages() as $page): ?>
                     <div class="card mt-2">
                       <div class="row no-gutters">
@@ -63,15 +58,26 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-            <div class="tab-pane fade show pt-3" id="reviews_tab" role="tabpanel" aria-labelledby="reviews_nav">
+            <div class="tab-pane pt-3" id="reviews_tab" role="tabpanel" aria-labelledby="reviews_nav">
                 <div class="row">
                     <div class="col">
+                        <div class="list-group">
                         <?php foreach($commerce->getReviews() as $review): ?>
-                            <span class="text-secondary"><?php echo $review->getDate()->format("F Y"); ?></span>&nbsp;<span class="badge badge-info"><?php echo $review->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review->getScore() ?></span>
-                            <p class="mt-2"><?php echo $review->getContent(); ?><br /><small><em><?php echo $review->getAuthor(); ?></em></small></p>
-
-                            <hr />
+                            <li class="list-group-item ">
+                                <div class="row">
+                                    <div class="col-10">
+                                        <?php if($review->getContent()): ?>
+                                        <p class="mb-2"><?php echo $review->getContent(); ?></p>
+                                        <?php endif; ?>
+                                        <small><?php echo $review->getAuthor(); ?> sur <strong><?php echo $review->getPlateform(); ?></strong><?php if($review->getScore()): ?> a mis la note de <strong><?php echo $review->getScore() ?></strong><?php endif; ?></small>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <small class="text-muted"><?php echo $review->getDate()->format("F Y"); ?></small>
+                                    </div>
+                                </div>
+                            </li>
                         <?php endforeach; ?>
+                        </div>
                     </div>
                     <div class="col-3">
                         <?php foreach($commerce->getReviewsFacets() as $facetName => $facets): ?>
@@ -85,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade show" id="images_tab" role="tabpanel" aria-labelledby="images_nav">
+            <div class="tab-pane" id="images_tab" role="tabpanel" aria-labelledby="images_nav">
             </div>
         </div>
     </div>
