@@ -58,7 +58,7 @@ class Commerce {
         $reviews = array();
         foreach($this->getPages() as $page) {
             foreach($page->getReviews() as $review) {
-                $reviews[$review[3].uniqid()] = $review;
+                $reviews[$review->getDate()->format('YmdHis').uniqid()] = $review;
             }
         }
 

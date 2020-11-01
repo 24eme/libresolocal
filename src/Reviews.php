@@ -10,7 +10,14 @@ class Reviews
                 continue;
             }
             $data = str_getcsv($line, ";");
-            $reviews[] = $data;
+            $review = new Review();
+            $review->setPlateform(Page::resolvePlateform($url));
+            $review->setDate(new DateTime($data[3]));
+            $review->setScore($data[4]);
+            $review->setAuthor($data[5]);
+            $review->setContent($data[6]);
+
+            $reviews[] = $review;
         }
 
         return $reviews;

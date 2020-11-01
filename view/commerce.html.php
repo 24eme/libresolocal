@@ -26,6 +26,8 @@
             </li>
         </ul>
         <div class="tab-content">
+            <div class="tab-pane fade show" id="informations_tab" role="tabpanel" aria-labelledby="informations_nav">
+            </div>
             <div class="tab-pane fade show active" id="pages_tab" role="tabpanel" aria-labelledby="pages_nav">
                 <?php foreach($commerce->getPages() as $page): ?>
                     <div class="card mt-2">
@@ -63,11 +65,13 @@
             </div>
             <div class="tab-pane fade show pt-3" id="reviews_tab" role="tabpanel" aria-labelledby="reviews_nav">
                 <?php foreach($commerce->getReviews() as $review): ?>
-                    <span class="text-secondary"><?php echo $review[3]; ?></span>&nbsp;<span class="badge badge-info"><?php //echo $page->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review[4]; ?></span>
-                    <p class="mt-2"><?php echo $review[6]; ?><br /><small><em><?php echo $review[5]; ?></em></small></p>
+                    <span class="text-secondary"><?php echo $review->getDate()->format("F Y"); ?></span>&nbsp;<span class="badge badge-info"><?php echo $review->getPlateform(); ?></span><span class="badge badge-warning float-right"><?php echo $review->getScore() ?></span>
+                    <p class="mt-2"><?php echo $review->getContent(); ?><br /><small><em><?php echo $review->getAuthor(); ?></em></small></p>
 
                     <hr />
                 <?php endforeach; ?>
+            </div>
+            <div class="tab-pane fade show" id="images_tab" role="tabpanel" aria-labelledby="images_nav">
             </div>
         </div>
     </div>
