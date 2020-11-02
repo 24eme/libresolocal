@@ -19,6 +19,7 @@ $test->expect(Page::resolvePlateform("https://goo.gl/maps/a65gdFzz7") == "google
 $test->expect(Page::resolvePlateform("https://www.pagesjaunes.fr/pros/123456789") == "pagesjaunes", "Reconnaissance des urls pages jaunes");
 $test->expect(Page::resolvePlateform("https://www.facebook.com/MaBoutique/") == "facebook", "Reconnaissance des urls facebook");
 $test->expect(Page::resolvePlateform("https://fr.mappy.com/poi/12345678abcdef#") == "mappy", "Reconnaissance des urls mappy");
+$test->expect(Page::resolvePlateform("https://www.petitscommerces.fr/page/ma-boutique/") == "petitscommerces", "Reconnaissance des urls petits commerces");
 
 $commerce = new Commerce();
 $commerce->addPage($urlTest);

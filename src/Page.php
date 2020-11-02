@@ -186,6 +186,9 @@ class Page {
         if(preg_match("|^https://fr.mappy.com/poi/[0-9a-z]+|", $url)) {
             return "mappy";
         }
+        if(preg_match("|^https://www.petitscommerces.fr/page/[^/]+/|", $url)) {
+            return "petitscommerces";
+        }
     }
 
 
