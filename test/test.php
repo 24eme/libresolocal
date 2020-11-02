@@ -7,6 +7,16 @@ $test = new Test();
 
 $urlTest = "https://www.google.fr/maps/place/test";
 $term = 'test';
+
+$test->expect(Scrapping::downloadSearch($term, false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/download_search.js "test" true', "commande de téléchargement html de la recherche");
+$test->expect(Scrapping::parseSearch("file.html", false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/parse_search.js "file.html" true', "commande de parsing du html de la recherche");
+$test->expect(Scrapping::downloadPage($urlTest, "file.jpg", false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/download_google.js "'.$urlTest.'" "file.jpg" true', "commande de téléchargement html d'une page");
+$test->expect(Scrapping::parsePage($urlTest, "file.html", false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/parse_google.js "file.html" true', "commande de parsing du html d'une page");
+$test->expect(Scrapping::existReviewsScript($urlTest), "le script de download des avis existe");
+$test->expect(!Scrapping::existReviewsScript("http://test.test/"), "le script de download des avis n'existe pas");
+$test->expect(Scrapping::downloadReviews($urlTest, false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/download_avis_google.js "'.$urlTest.'" true', "commande de téléchargement html des avis");
+$test->expect(Scrapping::parseReviews($urlTest, "file.html", false) == Scrapping::getNodejsBin().' '.Scrapping::getBinPath().'/parse_avis_google.js "file.html" true', "commande de parsing du html des avis");
+
 file_put_contents(__DIR__."/../cache/".md5($term).".csv", $urlTest."\n");
 
 $search = new Search($term);

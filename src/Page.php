@@ -140,34 +140,14 @@ class Page {
         $htmlFile = __DIR__."/../cache/".md5($this->url).".html";
         $imageFile = __DIR__."/../cache/".md5($this->url).".jpg";
         if(!file_exists($htmlFile)) {
-            file_put_contents($htmlFile, self::download($this->url, $imageFile, $this->verbose));
+            file_put_contents($htmlFile, Scrapping::downloadPage($this->url, $imageFile));
         }
 
         if(!file_exists($csvFile)) {
-            file_put_contents($csvFile, self::parse($this->url, $htmlFile, $this->verbose));
+            file_put_contents($csvFile, Scrapping::parsePage($this->url, $htmlFile));
         }
 
         return file_get_contents($csvFile);
-    }
-
-    public static function download($url, $imagePath, $verbose = false) {
-        $html = shell_exec("node ../bin/download_".self::resolvePlateform($url).".js '".$url."' $imagePath true");
-
-        if(!$html) {
-            throw new Exception("download failed");
-        }
-
-        return $html;
-    }
-
-    public static function parse($url, $htmlFile) {
-        $csv = shell_exec("node ../bin/parse_".self::resolvePlateform($url).".js $htmlFile");
-
-        if(!$csv) {
-            throw new Exception("parse failed");
-        }
-
-        return $csv;
     }
 
     public static function resolvePlateform($url) {
