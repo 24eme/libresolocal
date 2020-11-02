@@ -49,7 +49,7 @@ class Reviews
             return;
         }
 
-        $html = shell_exec("nodejs $scriptPath '".$url."' true");
+        $html = shell_exec("node $scriptPath '".$url."' true");
 
         if(!$html) {
             throw new Exception("download failed");
@@ -65,7 +65,7 @@ class Reviews
             return;
         }
 
-        $csv = shell_exec("nodejs $scriptPath $htmlFile");
+        $csv = shell_exec("node $scriptPath $htmlFile");
 
         return $csv;
     }

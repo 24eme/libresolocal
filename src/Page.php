@@ -151,7 +151,7 @@ class Page {
     }
 
     public static function download($url, $imagePath, $verbose = false) {
-        $html = shell_exec("nodejs ../bin/download_".self::resolvePlateform($url).".js '".$url."' $imagePath true");
+        $html = shell_exec("node ../bin/download_".self::resolvePlateform($url).".js '".$url."' $imagePath true");
 
         if(!$html) {
             throw new Exception("download failed");
@@ -161,7 +161,7 @@ class Page {
     }
 
     public static function parse($url, $htmlFile) {
-        $csv = shell_exec("nodejs ../bin/parse_".self::resolvePlateform($url).".js $htmlFile");
+        $csv = shell_exec("node ../bin/parse_".self::resolvePlateform($url).".js $htmlFile");
 
         if(!$csv) {
             throw new Exception("parse failed");

@@ -49,12 +49,12 @@ class Search {
 
     public static function download($term, $verbose = false) {
 
-        return shell_exec("nodejs ../bin/download_search.js \"".$term."\" true");
+        return shell_exec("node ../bin/download_search.js \"".$term."\" true");
     }
 
     public static function parse($htmlFile, $verbose = false) {
 
-        return shell_exec("nodejs ../bin/parse_search.js $htmlFile $verbose");
+        return shell_exec("node ../bin/parse_search.js $htmlFile $verbose");
     }
 
 
