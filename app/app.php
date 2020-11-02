@@ -5,7 +5,7 @@ require __DIR__ . '/bootstrap.php';
 $f3 = require __DIR__ . '/../vendor/fatfree/lib/base.php';
 
 
-$f3->route('GET /',
+$f3->route('GET @home: /',
     function() {
         echo View::instance()->render('../view/index.html.php');
     }
@@ -16,13 +16,18 @@ $f3->route('GET /search',
         $search = new Search($f3->get("GET.q"));
         $urls = $search->getUrls();
 
+        if(!count($urls)) {
+
+            return $f3->reroute('@home');
+        }
+
         $commerce = new Commerce();
         foreach($urls as $url) {
             $commerce->addPage($url);
         }
         $commerce->save();
 
-        $f3->reroute('@commerce(@key='.$commerce->getKey().')');
+        return $f3->reroute('@commerce(@key='.$commerce->getKey().')');
     }
 );
 
