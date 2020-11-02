@@ -1,3 +1,5 @@
-cache/
-data/
+cache/*
+!cache/.gitkeep
+data/*
+!data/.gitkeep
 node_modules/
